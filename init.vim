@@ -278,5 +278,10 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Git binding
-nmap <silent> <leader>gg :Gstatus<CR>
-
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Gpush<CR>
+nmap <leader>gB :Gblame<CR>
+nmap <leader>gk :Gbrowse<CR> 
+vmap <leader>gk :Gbrowse<CR> 
