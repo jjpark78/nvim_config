@@ -1,4 +1,5 @@
 " vim global config
+set nobackup
 set nocompatible
 set hidden
 set background=dark
@@ -50,20 +51,40 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'coreyja/fzf.devicon.vim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'kevinoid/vim-jsonc'
 Plug 'posva/vim-vue'
 Plug 'digitaltoad/vim-pug'
 Plug 'leafgarland/typescript-vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'sirver/ultisnips'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdcommenter'
+Plug 'godlygeek/tabular'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'yggdroot/indentline'
+Plug 'thaerkh/vim-workspace'
+Plug 'wakatime/vim-wakatime'
+Plug 'jiangmiao/auto-pairs'
+Plug 'terryma/vim-expand-region'
+Plug 'peterrincker/vim-argumentative'
+Plug 'tommcdo/vim-lion'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
+
+let g:indentLine_color_term = 245
+let g:indentLine_char_list = ['┊']
 
 "COC Lsp config
 let g:coc_global_extensions = [
  \ 'coc-tsserver',
- \ 'coc-tabnine'
+ \ 'coc-tabnine',
+ \ 'coc-vetur',
+ \ 'coc-eslint',
+ \ 'coc-prettier',
+ \ 'coc-json',
+ \ 'coc-ccls',
  \ ]
+
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
 endif
@@ -93,24 +114,37 @@ augroup END
 "json wih comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
 let mapleader = " "
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 nnoremap <silent><leader>qq :q!<CR>
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>hrr :PlugInstall<CR> 
+nnoremap <leader>hrr :PlugInstall<CR>
 nnoremap <leader>hro :so %<CR>
-nnoremap <leader>hre :PlugClean<CR> 
+nnoremap <leader>hre :PlugClean<CR>
 nnoremap <leader>hcc :CocConfig<CR>
 
 map gw <Plug>(easymotion-overwin-f2)
 map gl <Plug>(easymotion-overwin-line)
 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <C-H> :TmuxNavigateLeft<cr>
+nnoremap <C-J> :TmuxNavigateDown<cr>
+nnoremap <C-K> :TmuxNavigateUp<cr>
+nnoremap <C-L> :TmuxNavigateRight<cr>
+nnoremap <C-\> :TmuxNavigatePrevious<cr>
 
 nmap H ^
 vmap H ^
@@ -125,8 +159,12 @@ nnoremap <leader>wc :q<CR>
 nnoremap <silent> <leader>, :Buffers<CR>
 nnoremap <silent> <leader>fr :History<CR>
 nnoremap <silent> <leader>. :GFilesWithDevicons<CR>
-nnoremap <silent> <leader>fed :e ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>fev :e ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>fea :e ~/.config/alacritty/alacritty.yml<CR>
+nnoremap <silent> <leader>fet :e ~/.tmux.conf<CR>
+nnoremap <silent> <leader>fek :e ~/.config/kitty/kitty.conf<CR>
+nnoremap <silent> <leader>fec :e ~/.config/nvim/coc-settings.json<CR>
+nnoremap <silent> <leader>bc :bd<CR>
 
 "LSP Action
 function! s:check_back_space() abort
@@ -239,23 +277,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-"nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-"nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-"nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-"nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-"nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-"nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>-
-
-
+" Git binding
+nmap <silent> <leader>gg :Gstatus<CR>
 

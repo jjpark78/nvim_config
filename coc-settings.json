@@ -2,25 +2,42 @@
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
   "coc.preferences.formatOnSaveFiletypes": [
-		"javascript", 
-		"typescript", 
-		"typescriptreact", 
-		"json", 
-		"javascriptreact", 
-		"typescriptvue", 
-		"javascriptvue", 
-		"typescript.tsx"
-	],
-	"eslint.autoFixOnSave" : true,
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "typescriptvue",
+    "javascriptvue",
+    "typescript.tsx"
+  ],
+  "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
-		"javascript", 
-		"typescript", 
-		"typescriptreact", 
-		"javascriptreact", 
-		"typescript.tsx", 
-		"typescriptvue"
-	],
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "typescript.tsx",
+    "typescriptvue"
+  ],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "args": ["--log-file=/tmp/ccls.log", "-v=1"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        }
+      }
+    }
+  }
 }
+
