@@ -292,7 +292,10 @@ nmap <leader>gpu :Gpull upstream<CR>
 nmap <leader>gpo :Gpull origin<CR>
 nmap <leader>gv :GV<CR>
 nmap <leader>gV :GV!<CR>
+nmap <C-c><C-c> :wq<CR>
+nmap <C-c><C-k> :q!<CR>
 
 " Toggle
 nmap <leader>tt :TagbarToggle<CR>
 nmap <leader>ta :AirlineToggle<CR>
+
