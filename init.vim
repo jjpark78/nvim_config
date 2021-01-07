@@ -23,7 +23,7 @@ set termguicolors
 set updatetime=100
 set splitbelow
 set splitright
-set cmdheight=2
+set cmdheight=1
 
 syntax enable
 filetype plugin on
@@ -68,6 +68,10 @@ Plug 'terryma/vim-expand-region'
 Plug 'peterrincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'junegunn/gv.vim'
+Plug 'mhinz/vim-startify'
+Plug 'blueyed/vim-diminactive'
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -164,6 +168,7 @@ nnoremap <silent> <leader>fea :e ~/.config/alacritty/alacritty.yml<CR>
 nnoremap <silent> <leader>fet :e ~/.tmux.conf<CR>
 nnoremap <silent> <leader>fek :e ~/.config/kitty/kitty.conf<CR>
 nnoremap <silent> <leader>fec :e ~/.config/nvim/coc-settings.json<CR>
+nnoremap <silent> <leader>fez :e ~/.zshrc<CR>
 nnoremap <silent> <leader>bc :bd<CR>
 
 "LSP Action
@@ -277,11 +282,17 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Git binding
+" Git & Fugitive binding
 nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
+nmap <leader>gd :Gvdiffsplit<CR>
 nmap <leader>gc :Gcommit<CR>
-nmap <leader>gp :Gpush<CR>
+nmap <leader>gpp :Gpush<CR>
 nmap <leader>gB :Gblame<CR>
-nmap <leader>gk :Gbrowse<CR> 
-vmap <leader>gk :Gbrowse<CR> 
+nmap <leader>gpu :Gpull upstream<CR>
+nmap <leader>gpo :Gpull origin<CR>
+nmap <leader>gv :GV<CR>
+nmap <leader>gV :GV!<CR>
+
+" Toggle
+nmap <leader>tt :TagbarToggle<CR>
+nmap <leader>ta :AirlineToggle<CR>
