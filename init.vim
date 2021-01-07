@@ -36,6 +36,11 @@ else
   set signcolumn=yes
 endif
 
+au BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\ exe "norm g`\"" |
+\ endif
+
 "Plugin installed
 call plug#begin('~/.vim/plugged')
 
@@ -294,6 +299,10 @@ nmap <leader>gv :GV<CR>
 nmap <leader>gV :GV!<CR>
 nmap <C-c><C-c> :wq<CR>
 nmap <C-c><C-k> :q!<CR>
+imap <C-c><C-c> :wq<CR>
+vmap <C-c><C-c> :wq<CR>
+imap <C-c><C-k> :q!<CR>
+vmap <C-c><C-k> :q!<CR>
 
 " Toggle
 nmap <leader>tt :TagbarToggle<CR>
