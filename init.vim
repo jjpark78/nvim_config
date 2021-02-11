@@ -77,6 +77,7 @@ Plug 'junegunn/gv.vim'
 Plug 'mhinz/vim-startify'
 Plug 'blueyed/vim-diminactive'
 Plug 'majutsushi/tagbar'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'  }
 
 call plug#end()
 
@@ -175,6 +176,12 @@ nnoremap <silent> <leader>fek :e ~/.config/kitty/kitty.conf<CR>
 nnoremap <silent> <leader>fec :e ~/.config/nvim/coc-settings.json<CR>
 nnoremap <silent> <leader>fez :e ~/.zshrc<CR>
 nnoremap <silent> <leader>bc :bd<CR>
+
+"Search 
+nnoremap <leader>sf :Files<CR>
+nnoremap <leader>sp :Rg<CR>
+nnoremap <leader>sl :Lines<CR>
+nnoremap <leader>sc :Commits<CR>
 
 "LSP Action
 function! s:check_back_space() abort
