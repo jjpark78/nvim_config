@@ -78,6 +78,7 @@ Plug 'mhinz/vim-startify'
 Plug 'blueyed/vim-diminactive'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'  }
+Plug 'wellle/targets.vim'
 
 call plug#end()
 
@@ -106,10 +107,15 @@ endif
 let ayucolor="dark"
 colorscheme ayu
 
+" Netrw config
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+
 " Airline setup
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#show_tab_type = 0 
+let g:airline#extensions#tabline#show_tab_type = 1 
 let g:airline#extensions#tabline#formatter='unique_tail' 
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|' 
@@ -145,8 +151,8 @@ nnoremap <leader>hro :so %<CR>
 nnoremap <leader>hre :PlugClean<CR>
 nnoremap <leader>hcc :CocConfig<CR>
 
-map gw <Plug>(easymotion-overwin-f2)
-map gl <Plug>(easymotion-overwin-line)
+nmap s <Plug>(easymotion-overwin-f2)
+nmap <leader>l <Plug>(easymotion-overwin-line)
 
 let g:tmux_navigator_no_mappings = 1
 
@@ -155,6 +161,14 @@ nnoremap <C-J> :TmuxNavigateDown<cr>
 nnoremap <C-K> :TmuxNavigateUp<cr>
 nnoremap <C-L> :TmuxNavigateRight<cr>
 nnoremap <C-\> :TmuxNavigatePrevious<cr>
+
+" Move line
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 nmap H ^
 vmap H ^
@@ -250,7 +264,7 @@ xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
