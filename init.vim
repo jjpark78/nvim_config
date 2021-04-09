@@ -119,9 +119,15 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
 
-" colorscheme onedark
+" devicon setup
+let g:webdevicons_enable = 1
+
+"" colorscheme onedark
 let ayucolor="dark"
 colorscheme nord 
+
+"Startify setup
+let g:webdevicons_enable_startify = 1
 
 " Airline setup
 let g:airline#extensions#tabline#enabled = 1
@@ -131,6 +137,8 @@ let g:airline#extensions#tabline#formatter='unique_tail'
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|' 
 let g:airline_powerline_fonts=1 
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 augroup numbertoggle
   autocmd!
@@ -312,7 +320,7 @@ nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gvdiff<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
-nmap <leader>gc :Gcommit<CR>
+nmap <leader>gcc :Git commit<CR>
 nmap <leader>gpp :Gpush<CR>
 nmap <leader>gB :Gblame<CR>
 nmap <leader>gpu :Gpull upstream<CR>
@@ -332,3 +340,8 @@ nmap <leader>ta :AirlineToggle<CR>
 
 " Execute Shell Command
 nmap <leader>rgk :! gitkraken<CR>
+
+
+" Search Buffer or Lines
+nmap <leader>sl :Lines<CR> 
+nmap <leader>sp :GFilesWithDevicons<CR>
