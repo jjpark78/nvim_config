@@ -44,46 +44,62 @@ au BufReadPost *
 "Plugin installed
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
-Plug 'ayu-theme/ayu-vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+" Utils
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'coreyja/fzf.devicon.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'posva/vim-vue'
-Plug 'digitaltoad/vim-pug'
-Plug 'leafgarland/typescript-vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'wakatime/vim-wakatime'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+
+" UI
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'coreyja/fzf.devicon.vim'
+Plug 'yggdroot/indentline'
+
+" Edit & Text Object
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'yggdroot/indentline'
 Plug 'thaerkh/vim-workspace'
-Plug 'wakatime/vim-wakatime'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-expand-region'
 Plug 'peterrincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'junegunn/gv.vim'
 Plug 'mhinz/vim-startify'
 Plug 'blueyed/vim-diminactive'
 Plug 'majutsushi/tagbar'
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'  }
-Plug 'wellle/targets.vim'
+
+" LSP + Language
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'posva/vim-vue'
+Plug 'digitaltoad/vim-pug'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+" Colors
+Plug 'arcticicestudio/nord-vim'
+" Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 
 let g:indentLine_color_term = 245
 let g:indentLine_char_list = ['┊']
+
+" Gitlab 
+" let g:gitlab_server_address = 'https://gitlab.com'
+" let g:gitlab_private_token = 'bdWsiijYks3XWxLbDgHs'
+" let g:automatically_insert_cache = 1
 
 "COC Lsp config
 let g:coc_global_extensions = [
@@ -105,17 +121,12 @@ endif
 
 " colorscheme onedark
 let ayucolor="dark"
-colorscheme ayu
-
-" Netrw config
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_browse_split = 4
+colorscheme nord 
 
 " Airline setup
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#show_tab_type = 1 
+let g:airline#extensions#tabline#show_tab_type = 0 
 let g:airline#extensions#tabline#formatter='unique_tail' 
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|' 
@@ -126,6 +137,9 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+"tsx config
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 "json wih comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -151,8 +165,8 @@ nnoremap <leader>hro :so %<CR>
 nnoremap <leader>hre :PlugClean<CR>
 nnoremap <leader>hcc :CocConfig<CR>
 
-nmap s <Plug>(easymotion-overwin-f2)
-nmap <leader>l <Plug>(easymotion-overwin-line)
+map gw <Plug>(easymotion-overwin-f2)
+map gl <Plug>(easymotion-overwin-line)
 
 let g:tmux_navigator_no_mappings = 1
 
@@ -161,14 +175,6 @@ nnoremap <C-J> :TmuxNavigateDown<cr>
 nnoremap <C-K> :TmuxNavigateUp<cr>
 nnoremap <C-L> :TmuxNavigateRight<cr>
 nnoremap <C-\> :TmuxNavigatePrevious<cr>
-
-" Move line
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
 
 nmap H ^
 vmap H ^
@@ -186,16 +192,9 @@ nnoremap <silent> <leader>. :GFilesWithDevicons<CR>
 nnoremap <silent> <leader>fev :e ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>fea :e ~/.config/alacritty/alacritty.yml<CR>
 nnoremap <silent> <leader>fet :e ~/.tmux.conf<CR>
-nnoremap <silent> <leader>fek :e ~/.config/kitty/kitty.conf<CR>
 nnoremap <silent> <leader>fec :e ~/.config/nvim/coc-settings.json<CR>
 nnoremap <silent> <leader>fez :e ~/.zshrc<CR>
 nnoremap <silent> <leader>bc :bd<CR>
-
-"Search 
-nnoremap <leader>sf :Files<CR>
-nnoremap <leader>sp :Rg<CR>
-nnoremap <leader>sl :Lines<CR>
-nnoremap <leader>sc :Commits<CR>
 
 "LSP Action
 function! s:check_back_space() abort
@@ -247,7 +246,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(cocformat-selected)
+xmap <leader>ff  <Plug>(cocformat-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
@@ -264,7 +263,7 @@ xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ca  <Plug>(coc-codeaction)
+nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -310,7 +309,9 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Git & Fugitive binding
 nmap <leader>gs :Gstatus<CR>
-nmap <leader>gd :Gvdiffsplit<CR>
+nmap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gpp :Gpush<CR>
 nmap <leader>gB :Gblame<CR>
@@ -329,3 +330,5 @@ vmap <C-c><C-k> :q!<CR>
 nmap <leader>tt :TagbarToggle<CR>
 nmap <leader>ta :AirlineToggle<CR>
 
+" Execute Shell Command
+nmap <leader>rgk :! gitkraken<CR>

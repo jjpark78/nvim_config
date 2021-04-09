@@ -9,8 +9,7 @@
     "javascriptreact",
     "typescriptvue",
     "javascriptvue",
-    "typescript.tsx",
-    "javascript.jsx"
+    "typescript.tsx"
   ],
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
@@ -19,7 +18,6 @@
     "typescriptreact",
     "javascriptreact",
     "typescript.tsx",
-    "javascript.jsx",
     "typescriptvue"
   ],
   "diagnostic.errorSign": "•",

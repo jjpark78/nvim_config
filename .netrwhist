@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/jj/develop/jltech/smart-factory/backends'
+let g:netrw_dirhist_6='/home/jj/develop/jltech/smart-factory/backends/handlers'
+let g:netrw_dirhist_5='/home/jj/develop/jltech/embedded_cicd/images/t04'
+let g:netrw_dirhist_4='/home/jj/develop/jltech/embedded_cicd'
+let g:netrw_dirhist_3='/home/jj/develop/jltech/embedded_cicd/tutorial04'
+let g:netrw_dirhist_2='/home/jj/develop/jltech/embedded_cicd'
+let g:netrw_dirhist_1='/home/jj/develop/jltech/embedded_cicd/images'
+let g:netrw_dirhist_0='/home/jj/develop/jltech/smart-pillow/audio_test'
+let g:netrw_dirhist_9='/home/jj/develop/jltech/smart-pillow/audio_test/src'
+let g:netrw_dirhist_8='/home/jj/.config/neofetch'
