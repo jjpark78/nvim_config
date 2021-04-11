@@ -19,15 +19,26 @@ set softtabstop=2
 set shortmess+=c
 set nospell
 set tabstop=2
+set expandtab
+set shiftwidth=2
+set smartindent
 set termguicolors
 set updatetime=100
 set splitbelow
 set splitright
 set cmdheight=1
-
+set t_Co=256
+set cursorline
 syntax enable
+
 filetype plugin on
 filetype indent on
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
@@ -51,6 +62,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wakatime/vim-wakatime'
+Plug 'dylanaraps/root.vim'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -89,14 +101,18 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " Colors
 Plug 'arcticicestudio/nord-vim'
-" Plug 'ayu-theme/ayu-vim'
+Plug 'sonph/onehalf', {'rtp': 'vim'}
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 
 let g:indentLine_color_term = 245
 let g:indentLine_char_list = ['┊']
 
-" Gitlab 
+" Vim root changer
+let g:root#auto = 1
+
+"" Gitlab 
 " let g:gitlab_server_address = 'https://gitlab.com'
 " let g:gitlab_private_token = 'bdWsiijYks3XWxLbDgHs'
 " let g:automatically_insert_cache = 1
@@ -123,9 +139,10 @@ endif
 let g:webdevicons_enable = 1
 
 "" colorscheme onedark
-let ayucolor="dark"
-colorscheme nord 
+" let ayucolor="dark"
 
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
 "Startify setup
 let g:webdevicons_enable_startify = 1
 
@@ -164,11 +181,25 @@ let g:NERDToggleCheckAllLines = 1
 
 let mapleader = " "
 
+" Git Gutter
+let g:gitgutter_sign_added='┃'
+let g:gitgutter_sign_modified='┃'
+let g:gitgutter_sign_removed='◢'
+let g:gitgutter_sign_removed_first_line='◥'
+let g:gitgutter_sign_modified_removed='◢'
+
+" Copy Paragraph
+noremap cp yap<S-}>
+
+" Aling Current Paragraph
+noremap ap =ip
+
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent><leader>qq :q!<CR>
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>hrr :PlugInstall<CR>
+nnorema <leader>hrr :PlugInstall<CR>
 nnoremap <leader>hro :so %<CR>
 nnoremap <leader>hre :PlugClean<CR>
 nnoremap <leader>hcc :CocConfig<CR>
@@ -254,8 +285,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>ff  <Plug>(cocformat-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fb  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -267,11 +297,11 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" xmap <leader>csa  <Plug>(coc-codeaction-selected)
+" nmap <leader>csa  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -335,13 +365,29 @@ imap <C-c><C-k> :q!<CR>
 vmap <C-c><C-k> :q!<CR>
 
 " Toggle
-nmap <leader>tt :TagbarToggle<CR>
 nmap <leader>ta :AirlineToggle<CR>
 
 " Execute Shell Command
-nmap <leader>rgk :! gitkraken<CR>
-
+nmap <leader>rgk :silent !gitkraken<CR>
 
 " Search Buffer or Lines
-nmap <leader>sl :Lines<CR> 
-nmap <leader>sp :GFilesWithDevicons<CR>
+nmap <leader>sl :BLines<CR> 
+nmap <leader>sp :Rg<CR>
+nmap <leader>sf :GFiles<CR>
+
+" Buffer Actions
+nmap <leader>bd :bd<CR>
+
+" Open Files from NTree
+nmap <leader>od :Ntree<CR>
+nmap <leader>ot :TagbarToggle<CR>
+
+" Change Color scheme
+nnoremap <silent> <leader>hcs :call fzf#run({
+  \ 'source': 
+  \    map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+  \        "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+  \ 'sink':    'colo',
+  \ 'options': '+m',
+  \ 'left':    30
+  \ })<CR>

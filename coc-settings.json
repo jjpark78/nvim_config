@@ -1,16 +1,6 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "typescriptvue",
-    "javascriptvue",
-    "typescript.tsx"
-  ],
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
@@ -18,6 +8,20 @@
     "typescriptreact",
     "javascriptreact",
     "typescript.tsx",
+    "typescriptvue",
+    "javascriptvue"
+  ],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "typescript",
+    "javascript",
+    "json",
+    "vue",
+    "react",
+    "javascriptreact",
+    "typescriptreact",
+    "javascriptvue",
     "typescriptvue"
   ],
   "diagnostic.errorSign": "•",
