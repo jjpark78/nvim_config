@@ -116,11 +116,6 @@ let g:indentLine_char_list = ['┊']
 " Vim root changer
 let g:root#auto = 1
 
-"" Gitlab 
-" let g:gitlab_server_address = 'https://gitlab.com'
-" let g:gitlab_private_token = 'bdWsiijYks3XWxLbDgHs'
-" let g:automatically_insert_cache = 1
-
 "COC Lsp config
 let g:coc_global_extensions = [
  \ 'coc-tsserver',
@@ -299,11 +294,6 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-" xmap <leader>csa  <Plug>(coc-codeaction-selected)
-" nmap <leader>csa  <Plug>(coc-codeaction-selected)
-
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ca  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
@@ -355,10 +345,10 @@ nmap <leader>gd :Gvdiff<CR>
 nmap gdh :diffget //2<CR>
 nmap gdl :diffget //3<CR>
 nmap <leader>gcc :Git commit<CR>
-nmap <leader>gpp :Gpush<CR>
+nmap <leader>gpp :Git push<CR>
 nmap <leader>gB :Gblame<CR>
-nmap <leader>gpu :Gpull upstream<CR>
-nmap <leader>gpo :Gpull origin<CR>
+nmap <leader>gPu :Gpull upstream<CR>
+nmap <leader>gPo :Gpull origin<CR>
 nmap <leader>gv :GV<CR>
 nmap <leader>gV :GV!<CR>
 nmap <C-c><C-c> :wq<CR>
@@ -373,6 +363,7 @@ nmap <leader>ta :AirlineToggle<CR>
 
 " Execute Shell Command
 nmap <leader>rgk :silent !gitkraken<CR>
+nmap <leader>rgc :silent !google-chrome<CR>
 
 " Search Buffer or Lines
 nmap <leader>sl :BLines<CR> 
