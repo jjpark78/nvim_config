@@ -99,7 +99,11 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-" Colors
+" Coding Utils
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+"" Colors
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', {'rtp': 'vim'}
 Plug 'ayu-theme/ayu-vim'
@@ -143,6 +147,7 @@ let g:webdevicons_enable = 1
 
 colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
+
 "Startify setup
 let g:webdevicons_enable_startify = 1
 
@@ -175,18 +180,18 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
-let g:NERDCommentEmptyLines = 1
+let g:NERDCommentEmptyLines = 0
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 let mapleader = " "
 
 " Git Gutter
-let g:gitgutter_sign_added='┃'
-let g:gitgutter_sign_modified='┃'
-let g:gitgutter_sign_removed='◢'
-let g:gitgutter_sign_removed_first_line='◥'
-let g:gitgutter_sign_modified_removed='◢'
+" let g:gitgutter_sign_added='┃'
+" let g:gitgutter_sign_modified='┃'
+" let g:gitgutter_sign_removed='◢'
+" let g:gitgutter_sign_removed_first_line='◥'
+" let g:gitgutter_sign_modified_removed='◢'
 
 " Copy Paragraph
 noremap cp yap<S-}>
@@ -195,11 +200,10 @@ noremap cp yap<S-}>
 noremap ap =ip
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent><leader>qq :q!<CR>
 nnoremap <leader>fs :w<CR>
-nnorema <leader>hrr :PlugInstall<CR>
+nnoremap <leader>hrr :PlugInstall<CR>
+nnoremap <leader>hru :PlugUpdate<CR>
 nnoremap <leader>hro :so %<CR>
 nnoremap <leader>hre :PlugClean<CR>
 nnoremap <leader>hcc :CocConfig<CR>
@@ -348,8 +352,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Git & Fugitive binding
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gvdiff<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>
+nmap gdh :diffget //2<CR>
+nmap gdl :diffget //3<CR>
 nmap <leader>gcc :Git commit<CR>
 nmap <leader>gpp :Gpush<CR>
 nmap <leader>gB :Gblame<CR>
@@ -391,3 +395,9 @@ nnoremap <silent> <leader>hcs :call fzf#run({
   \ 'options': '+m',
   \ 'left':    30
   \ })<CR>
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
