@@ -21,6 +21,7 @@ set nospell
 set tabstop=2
 set expandtab
 set shiftwidth=2
+set clipboard=unnamedplus
 set smartindent
 set termguicolors
 set updatetime=100
@@ -30,9 +31,13 @@ set cmdheight=1
 set t_Co=256
 set cursorline
 syntax enable
-
+set visualbell 
+set t_vb=
 filetype plugin on
 filetype indent on
+set formatoptions-=cro
+
+set guifont=FiraCode\ NF,Gulim:h16
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -68,6 +73,7 @@ Plug 'dylanaraps/root.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'stsewd/fzf-checkout.vim'
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -79,7 +85,8 @@ Plug 'yggdroot/indentline'
 " Edit & Text Object
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'tomtom/tcomment_vim'
 Plug 'godlygeek/tabular'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'thaerkh/vim-workspace'
@@ -99,23 +106,40 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-" Coding Utils
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-
-"" Colors
+" Colors
 Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', {'rtp': 'vim'}
 Plug 'ayu-theme/ayu-vim'
+
+" Terminal 
+Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/fzf-floaterm'
+
+" Session
+Plug 'tpope/vim-obsession'
+
+"  weather
+Plug 'mattn/webapi-vim'
+Plug 'Wildog/airline-weather.vim'
 
 call plug#end()
 
 let g:indentLine_color_term = 245
 let g:indentLine_char_list = ['┊']
 
+" Weather 
+let g:weather#area = 'Daejeon,KR'
+let g:weather#unit = 'metric'
+
 " Vim root changer
 let g:root#auto = 1
 
+"" Gitlab 
+" let g:gitlab_server_address = 'https://gitlab.com'
+" let g:gitlab_private_token = 'bdWsiijYks3XWxLbDgHs'
+" let g:automatically_insert_cache = 1
+
+let g:fzf_session_path = '/home/jj/.local/share/nvim/session' 
 "COC Lsp config
 let g:coc_global_extensions = [
  \ 'coc-tsserver',
@@ -152,8 +176,9 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_type = 0 
 let g:airline#extensions#tabline#formatter='unique_tail' 
 let g:airline#extensions#tabline#left_sep=' '
-let g:airline#extensions#tabline#left_alt_sep='|' 
-let g:airline_powerline_fonts=1 
+let g:airline#extensions#hunks#enabled=0
+" let g:airline#extensions#tabline#left_alt_sep='|'
+let g:airline_powerline_fonts=1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
@@ -169,24 +194,14 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 "json wih comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDAltDelims_java = 1
-let g:NERDCommentEmptyLines = 0
-let g:NERDTrimTrailingWhitespace = 1
-let g:NERDToggleCheckAllLines = 1
-
 let mapleader = " "
 
 " Git Gutter
-" let g:gitgutter_sign_added='┃'
-" let g:gitgutter_sign_modified='┃'
-" let g:gitgutter_sign_removed='◢'
-" let g:gitgutter_sign_removed_first_line='◥'
-" let g:gitgutter_sign_modified_removed='◢'
+let g:gitgutter_sign_added='┃'
+let g:gitgutter_sign_modified='┃'
+let g:gitgutter_sign_removed='◢'
+let g:gitgutter_sign_removed_first_line='◥'
+let g:gitgutter_sign_modified_removed='◢'
 
 " Copy Paragraph
 noremap cp yap<S-}>
@@ -224,6 +239,7 @@ nnoremap <leader>ws :split<CR>
 nnoremap <leader>wc :q<CR>
 
 "Files, Buffers
+nnoremap <leader><leader> :Files<CR>
 nnoremap <silent> <leader>, :Buffers<CR>
 nnoremap <silent> <leader>fr :History<CR>
 nnoremap <silent> <leader>. :GFilesWithDevicons<CR>
@@ -339,7 +355,17 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Git & Fugitive binding
+" COC Kill child process when quit vim
+"
+autocmd VimLeavePre * :call coc#rpc#kill()
+autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
+
+"" Git & Fugitive binding
+nmap <leader>gbl :GBranches<CR>
+nmap <leader>gbc :GBranches create<CR>
+nmap <leader>gbm :GBranches merge<CR>
+nmap <leader>gtl :GTags<CR>
+nmap <leader>gtc :GTags create<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gvdiff<CR>
 nmap gdh :diffget //2<CR>
@@ -357,6 +383,14 @@ imap <C-c><C-c> :wq<CR>
 vmap <C-c><C-c> :wq<CR>
 imap <C-c><C-k> :q!<CR>
 vmap <C-c><C-k> :q!<CR>
+
+" Move Line Action
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Toggle
 nmap <leader>ta :AirlineToggle<CR>
@@ -379,6 +413,10 @@ nmap <leader>ot :TagbarToggle<CR>
 
 " Change Color scheme
 nnoremap <silent> <leader>hcs :call fzf#run({
+nmap <leader>ot :TagbarToggle<CR>
+
+" Change Color scheme
+nnoremap <silent> <leader>hcs :call fzf#run({
   \ 'source': 
   \    map(split(globpath(&rtp, "colors/*.vim"), "\n"),
   \        "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
@@ -387,8 +425,43 @@ nnoremap <silent> <leader>hcs :call fzf#run({
   \ 'left':    30
   \ })<CR>
 
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
+" Float Terminal Action
+let g:floaterm_position = 'bottomright'
+let g:floaterm_width = 0.5
+let g:floaterm_height = 0.49
+nnoremap   <silent><C-A-o>    :FloatermNew<CR>
+tnoremap   <silent><C-A-o>    <C-\><C-n>:FloatermNew<CR>
+nnoremap   <silent><C-A-j>    :FloatermPrev<CR>
+tnoremap   <silent><C-A-j>   <C-\><C-n>:FloatermPrev<CR>
+nnoremap   <silent><C-A-k>    :FloatermNext<CR>
+tnoremap   <silent><C-A-k>    <C-\><C-n>:FloatermNext<CR>
+nnoremap   <silent><C-A-h>   :FloatermToggle<CR>
+tnoremap   <silent><C-A-h>   <C-\><C-n>:FloatermToggle<CR> 
+
+nnoremap <leader>rdm :FloatermNew --cwd=<root> yarn dev<CR>
+
+" Session Action
+function! s:sessions()
+  call fzf#run({
+  \ 'source':  'ls -1 ~/.local/share/nvim/session',
+  \ 'sink':    'SLoad',
+  \ 'options': '+m --prompt="Sessions> "',
+  \ 'down':    '10'
+  \})
+endfunction
+command! Sessions call s:sessions()
+nnoremap <leader><TAB>l :Sessions<CR>
+nnoremap <leader>qS :SSave<CR>
+
+" TMuxinator Session files
+function! s:tworkspace()
+  call fzf#run({
+  \ 'source':  'ls -d -1 ~/.config/tmuxinator/*.yml',
+  \ 'sink':    'e',
+  \ 'options': '+m --prompt="Tmuxinator> "',
+  \ 'down':    '10'
+  \})
+endfunction
+command! TWorkspaces call s:tworkspace()
+nnoremap <leader><TAB>i :TWorkspaces<CR>
+
