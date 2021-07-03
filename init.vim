@@ -68,10 +68,12 @@ Plug 'sirver/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'wakatime/vim-wakatime'
 Plug 'dylanaraps/root.vim'
+Plug 'mhinz/vim-grepper'
 
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/gv.vim'
 Plug 'stsewd/fzf-checkout.vim'
 
@@ -122,6 +124,12 @@ Plug 'tpope/vim-obsession'
 Plug 'mattn/webapi-vim'
 Plug 'Wildog/airline-weather.vim'
 
+" Jira Integration
+Plug 'mnpk/vim-jira-complete'
+
+" Markdown preview 
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 call plug#end()
 
 let g:indentLine_color_term = 245
@@ -130,6 +138,8 @@ let g:indentLine_char_list = ['┊']
 " Weather 
 let g:weather#area = 'Daejeon,KR'
 let g:weather#unit = 'metric'
+let g:weather#cache_file = '~/.weather'
+let g:weather#cache_ttl = '1800'
 
 " Vim root changer
 let g:root#auto = 1
@@ -165,7 +175,7 @@ let g:webdevicons_enable = 1
 " let ayucolor="dark"
 
 colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
+" let g:airline_theme='nord'
 
 "Startify setup
 let g:webdevicons_enable_startify = 1
@@ -177,6 +187,8 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#formatter='unique_tail' 
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#hunks#enabled=0
+let g:airline_section_z = '%3p%% %3l/%L ' 
+let g:airline#extensions#whitespace#enabled = 0
 " let g:airline#extensions#tabline#left_alt_sep='|'
 let g:airline_powerline_fonts=1
 let g:webdevicons_enable_airline_tabline = 1
@@ -209,6 +221,9 @@ noremap cp yap<S-}>
 " Aling Current Paragraph
 noremap ap =ip
 
+" Markdown Preview
+let vim_markdown_preview_github=1
+
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <silent><leader>qq :q!<CR>
 nnoremap <leader>fs :w<CR>
@@ -237,12 +252,14 @@ vmap L $
 nnoremap <leader>wv :vsplit<CR>
 nnoremap <leader>ws :split<CR>
 nnoremap <leader>wc :q<CR>
-
+nnoremap <silent> <Esc><Esc> <Esc>:noh<CR><Esc>
 "Files, Buffers
-nnoremap <leader><leader> :Files<CR>
+let g:fzf_preview_window = ['up:60%', 'ctrl-/']
+
+nnoremap <silent> <leader><leader> :Files<CR>
 nnoremap <silent> <leader>, :Buffers<CR>
 nnoremap <silent> <leader>fr :History<CR>
-nnoremap <silent> <leader>. :GFilesWithDevicons<CR>
+nnoremap <silent> <leader>. :GFiles<CR>
 nnoremap <silent> <leader>fev :e ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>fea :e ~/.config/alacritty/alacritty.yml<CR>
 nnoremap <silent> <leader>fet :e ~/.tmux.conf<CR>
@@ -314,6 +331,8 @@ augroup end
 nmap <leader>ca  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+" show lsp linter messages
+nmap <leader>cx  :CocDiagnostics<CR> 
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -375,14 +394,9 @@ nmap <leader>gpp :Git push<CR>
 nmap <leader>gB :Gblame<CR>
 nmap <leader>gPu :Gpull upstream<CR>
 nmap <leader>gPo :Gpull origin<CR>
+nmap <leader>gl  :0Glog<CR>
 nmap <leader>gv :GV<CR>
 nmap <leader>gV :GV!<CR>
-nmap <C-c><C-c> :wq<CR>
-nmap <C-c><C-k> :q!<CR>
-imap <C-c><C-c> :wq<CR>
-vmap <C-c><C-c> :wq<CR>
-imap <C-c><C-k> :q!<CR>
-vmap <C-c><C-k> :q!<CR>
 
 " Move Line Action
 nnoremap <A-j> :m .+1<CR>==
@@ -405,14 +419,13 @@ nmap <leader>sp :Rg<CR>
 nmap <leader>sf :GFiles<CR>
 
 " Buffer Actions
-nmap <leader>bd :bd<CR>
+nmap <leader>bd :bd!<CR>
 
 " Open Files from NTree
 nmap <leader>od :Ntree<CR>
 nmap <leader>ot :TagbarToggle<CR>
 
 " Change Color scheme
-nnoremap <silent> <leader>hcs :call fzf#run({
 nmap <leader>ot :TagbarToggle<CR>
 
 " Change Color scheme
@@ -426,8 +439,8 @@ nnoremap <silent> <leader>hcs :call fzf#run({
   \ })<CR>
 
 " Float Terminal Action
-let g:floaterm_position = 'bottomright'
-let g:floaterm_width = 0.5
+let g:floaterm_position = 'bottom'
+let g:floaterm_width  = 1.0
 let g:floaterm_height = 0.49
 nnoremap   <silent><C-A-o>    :FloatermNew<CR>
 tnoremap   <silent><C-A-o>    <C-\><C-n>:FloatermNew<CR>
@@ -451,7 +464,7 @@ function! s:sessions()
 endfunction
 command! Sessions call s:sessions()
 nnoremap <leader><TAB>l :Sessions<CR>
-nnoremap <leader>qS :SSave<CR>
+nnoremap <leader><TAB>s :SSave<CR>
 
 " TMuxinator Session files
 function! s:tworkspace()
@@ -462,6 +475,7 @@ function! s:tworkspace()
   \ 'down':    '10'
   \})
 endfunction
-command! TWorkspaces call s:tworkspace()
-nnoremap <leader><TAB>i :TWorkspaces<CR>
+
+command! TMuxWorkspaces call s:tworkspace()
+nnoremap <leader>fet :TMuxWorkspaces<CR>
 
