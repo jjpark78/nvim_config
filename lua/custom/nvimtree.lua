@@ -10,7 +10,7 @@
   open_on_tab = false,
   sort_by = "name",
   update_cwd = false,
-  reload_on_bufenter = false,
+  reload_on_bufenter = true,
   view = {
     width = 30,
     height = 30,
@@ -83,7 +83,7 @@
       restrict_above_cwd = false,
     },
     open_file = {
-      quit_on_open = false,
+      quit_on_open = true,
       resize_window = false,
       window_picker = {
         enable = true,
