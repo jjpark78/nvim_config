@@ -45,6 +45,8 @@ nmap('<leader>fr', '<cmd>Telescope oldfiles<CR>', 'Recent files')
 nmap('<leader>pp', '<cmd>Telescope projects<CR>', 'Project list')
 
 -- sessions
+nmap('<leader><TAB>s', ":lua require('auto-session').SaveSession(require('auto-session').get_root_dir() .. vim.fn.input('SessionName > '))<CR>", 'Save Session File')
+nmap('<leader><TAB>l', ":SearchSession<CR>", 'List Session File')
 -- nmap('<leader><TAB>l', ':Sessions<CR>')
 -- nmap('<leader><TAB>s', ':SSave<CR>')
 

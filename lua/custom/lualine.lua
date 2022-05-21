@@ -61,7 +61,7 @@ local config = {
     lualine_b = {},
     lualine_y = {},
     lualine_z = {},
-    lualine_c = {},
+    lualine_c = {require('auto-session-library').current_session_name},
     lualine_x = {},
   },
 }

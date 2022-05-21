@@ -44,13 +44,6 @@ require('packer').startup(function()
   use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
   use 'onsails/lspkind.nvim'
   use {
-    'rmagatti/session-lens',
-    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
-    config = function()
-      require('session-lens').setup({--[[your custom config--]]})
-    end
-  }
-  use {
     'rmagatti/auto-session',
     config = function()
       require('auto-session').setup {
@@ -58,6 +51,10 @@ require('packer').startup(function()
         auto_session_suppress_dirs = {'~/', '~/develop'}
       }
     end
+  }
+  use {
+    'rmagatti/session-lens',
+    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
   }
   use {
     'numToStr/Comment.nvim',
@@ -70,17 +67,26 @@ require('packer').startup(function()
   }
 end)
 
+require('auto-session').setup(require('custom.session'))
 require('custom.lazygit')
 require('custom.nvim-cmp')
 require('nvim-autopairs').setup()
 require('gitsigns').setup()
-require('bufferline').setup()
 require('which-key').setup()
-require("themer").setup({ colorscheme = "onedark" })
+require('bufferline').setup()
+require("themer").setup({ colorscheme = "dracula" })
 
 require('nvim-lsp-installer').setup()
 require('custom.lsp')
 
+require('session-lens').setup({
+  prompt_title = 'MY SESSIONS',
+  theme_conf = {
+    border = true,
+    winblend = 0
+  },
+  previewer = false,
+})
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
 require('telescope').load_extension('session-lens')
@@ -88,6 +94,7 @@ require('telescope').load_extension('lazygit')
 
 require("custom.floaterm")
 require('custom.lualine')
+
 require('custom.nvimtree')
 require('startup').setup(require('custom.dashboard'))
 require('project_nvim').setup(require('custom.project'))
