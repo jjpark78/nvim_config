@@ -84,6 +84,7 @@ require('custom.lsp')
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
 require('telescope').load_extension('session-lens')
+require('telescope').load_extension('lazygit')
 
 require("custom.floaterm")
 require('custom.lualine')

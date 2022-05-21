@@ -2,6 +2,8 @@ vim.cmd([[
 if has('nvim') && executable('nvr')
   let $GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 endif
+
+autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
 ]])
 
 vim.g.lazy_git_float_window_winblend = 0
