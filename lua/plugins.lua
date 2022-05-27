@@ -56,12 +56,7 @@ require('packer').startup(function()
     'rmagatti/session-lens',
     requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
   }
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup(require('custom.comment'))
-    end
-  }
+  use { 'numToStr/Comment.nvim' }
   use {
     'kdheepak/lazygit.nvim'
   }
@@ -87,6 +82,7 @@ require('session-lens').setup({
   },
   previewer = false,
 })
+require('Comment').setup(require('custom.comment'))
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
 require('telescope').load_extension('session-lens')

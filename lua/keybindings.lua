@@ -27,6 +27,7 @@ end
 nmap('<leader>fev', ':e ~/.config/nvim/init.lua<CR>', 'Jump to init.lua')
 nmap('<leader>fek', ':e ~/.config/nvim/lua/keybindings.lua<CR>', 'Jump to keybindings.lua')
 nmap('<leader>fep', ':e ~/.config/nvim/lua/plugins.lua<CR>', 'Jump to plugins.lua')
+nmap('<leader>fet', ':e ~/.tmux.conf<CR>', 'Jump to tmux.conf')
 nmap('<leader>fez', ':e ~/.zsh_env<CR>', 'Jump to ZSH Personal ENV Config')
 
 -- reload, install plugins, cleanup plugins
@@ -36,7 +37,7 @@ nmap('<leader>hrc', ':PackerClean<CR>', 'Packer clean command')
 nmap('<leader>hru', ':PackerUpdate<CR>', 'Packer update command')
 
 -- buffer, files actions
-nmap('<leader>ff', '<cmd>Telescope find_files<CR>', 'Find files')
+nmap('<leader><leader>', '<cmd>Telescope find_files<CR>', 'Find files')
 nmap('<leader>,', '<cmd>Telescope buffers<CR>', 'Opend buffers')
 nmap('<leader>.', '<cmd>Telescope git_files<CR>', 'Git files')
 nmap('<leader>fs', ':w<CR>', 'Save to disk buffer')
@@ -101,9 +102,10 @@ nmap('<A-,>', ':FloatermNew --wintype=float --width=0.98 --height=0.5 --position
 tmap('<A-,>', '<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>')
 tmap('<A-k>', '<C-\\><C-n>:FloatermNext<CR>')
 tmap('<A-j>', '<C-\\><C-n>:FloatermPrev<CR>')
+tmap('<esc>', '<C-\\><C-n>')
 
 -- etc
 nmap('<leader>ht', ':Telescope themes<CR>', 'Change colorscheme')
-
+nmap('<leader>00', ':noh<CR>', 'No higlight')
 -- exit neovim
 nmap('<leader>qq', ':qa<CR>', 'Quit neovim')

@@ -23,15 +23,16 @@ set nospell
 set tabstop=2
 set expandtab
 set shiftwidth=2
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set smartindent
 set termguicolors
-set updatetime=100
 set splitbelow
 set splitright
 set cmdheight=1
 set cursorline
 syntax enable
+set termguicolors
+set updatetime=100
 filetype plugin on
 filetype indent on
 set formatoptions-=cro
