@@ -24,19 +24,18 @@ local function tmap(shortcut, command)
 end
 
 -- quick access to specific files macro
-nmap('<leader>fev', ':e ~/.config/nvim/init.lua<CR>', 'Jump to init.lua')
-nmap('<leader>fek', ':e ~/.config/nvim/lua/keybindings.lua<CR>', 'Jump to keybindings.lua')
-nmap('<leader>fep', ':e ~/.config/nvim/lua/plugins.lua<CR>', 'Jump to plugins.lua')
-nmap('<leader>fez', ':e ~/.zsh_env<CR>', 'Jump to ZSH Personal ENV Config')
-
+nmap('<leader>fev', ':e C:\\Users\\jaejinpark\\AppData\\Local\\nvim\\init.lua<CR>', 'Jump to init.lua')
+nmap('<leader>fek', ':e C:\\Users\\jaejinpark\\AppData\\Local\\nvim\\lua\\keybindings.lua<CR>', 'Jump to keybindings.lua')
+nmap('<leader>fep', ':e C:\\Users\\jaejinpark\\AppData\\Local\\nvim\\lua\\plugins.lua<CR>', 'Jump to plugins.lua')
+nmap('<leader>fea', ':e C:\\Users\\jaejinpark\\AppData\\Roaming\\alacritty\\alacritty.yml<CR>')
 -- reload, install plugins, cleanup plugins
-nmap('<leader>hrr', ':so ~/.config/nvim/init.lua<CR>:PackerInstall<CR>', 'Reload configuration')
+nmap('<leader>hrr', ':so C:\\Users\\jaejinpark\\AppData\\Local\\nvim\\init.lua<CR>:PackerInstall<CR>', 'Reload configuration')
 nmap('<leader>hro', ':so %<CR>', 'Apply this Buffer')
 nmap('<leader>hrc', ':PackerClean<CR>', 'Packer clean command')
 nmap('<leader>hru', ':PackerUpdate<CR>', 'Packer update command')
 
 -- buffer, files actions
-nmap('<leader>ff', '<cmd>Telescope find_files<CR>', 'Find files')
+nmap('<leader><leader>', '<cmd>Telescope find_files<CR>', 'Find files')
 nmap('<leader>,', '<cmd>Telescope buffers<CR>', 'Opend buffers')
 nmap('<leader>.', '<cmd>Telescope git_files<CR>', 'Git files')
 nmap('<leader>fs', ':w<CR>', 'Save to disk buffer')
@@ -101,6 +100,11 @@ nmap('<A-,>', ':FloatermNew --wintype=float --width=0.98 --height=0.5 --position
 tmap('<A-,>', '<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>')
 tmap('<A-k>', '<C-\\><C-n>:FloatermNext<CR>')
 tmap('<A-j>', '<C-\\><C-n>:FloatermPrev<CR>')
+
+-- project build 
+nmap('<leader>pb', ':make | TroubleToggle quickfix<CR>', 'Build')
+nmap('<leader>pd', ':TroubleToggle workspace_diagnostics<CR>', 'Diagnostics')
+nmap('<leader>pl', ':TroubleToggle loclist<CR>', 'Locations')
 
 -- etc
 nmap('<leader>ht', ':Telescope themes<CR>', 'Change colorscheme')

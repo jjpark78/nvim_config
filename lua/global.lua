@@ -23,7 +23,7 @@ set nospell
 set tabstop=2
 set expandtab
 set shiftwidth=2
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set smartindent
 set termguicolors
 set updatetime=100
