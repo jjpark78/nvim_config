@@ -34,7 +34,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { 'ccls', 'cmake', 'volar', 'pyright', 'rust_analyzer', 'tsserver', 'eslint' }
+local servers = { 'arduino_language_server', 'clangd', 'cmake', 'volar', 'pyright', 'rust_analyzer', 'tsserver', 'eslint' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     capabilities = capabilities,

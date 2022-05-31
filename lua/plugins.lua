@@ -2,13 +2,6 @@ vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use { 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } }
-  use {
-    'w0rp/ale',
-    ft = { 'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex' },
-    cmd = 'ALEEnable',
-    config = 'vim.cmd[[ALEEnable]]'
-  }
   use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
@@ -43,15 +36,15 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-cmp'
   use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
   use 'onsails/lspkind.nvim'
-  use {
-    'rmagatti/auto-session',
-    config = function()
-      require('auto-session').setup {
-        log_level = 'info',
-        auto_session_suppress_dirs = {'~/', '~/develop'}
-      }
-    end
-  }
+  -- use {
+  --   'rmagatti/auto-session',
+  --   config = function()
+  --     require('auto-session').setup {
+  --       log_level = 'info',
+  --       auto_session_suppress_dirs = {'~/', '~/develop'}
+  --     }
+  --   end
+  -- }
   use {
     'rmagatti/session-lens',
     requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
@@ -60,9 +53,16 @@ require('packer').startup(function()
   use {
     'kdheepak/lazygit.nvim'
   }
+  use {
+    'neomake/neomake'
+  }
+  use {
+    'TimUntersberger/neogit', requires='nvim-lua/plenaty.nvim'
+  }
 end)
 
-require('auto-session').setup(require('custom.session'))
+-- require('auto-session').setup(require('custom.session'))
+require('neogit').setup()
 require('custom.lazygit')
 require('custom.nvim-cmp')
 require('nvim-autopairs').setup()
