@@ -28,6 +28,7 @@ nmap('<leader>fev', ':e ~/.config/nvim/init.lua<CR>', 'Jump to init.lua')
 nmap('<leader>fek', ':e ~/.config/nvim/lua/keybindings.lua<CR>', 'Jump to keybindings.lua')
 nmap('<leader>fep', ':e ~/.config/nvim/lua/plugins.lua<CR>', 'Jump to plugins.lua')
 nmap('<leader>fet', ':e ~/.tmux.conf<CR>', 'Jump to tmux.conf')
+nmap('<leader>fem', ':Telescope find_files cwd=/home/jjpark/.config/tmuxinator<CR>', 'Jump to Tmuxinator Session Folder')
 nmap('<leader>fez', ':e ~/.zsh_env<CR>', 'Jump to ZSH Personal ENV Config')
 
 -- reload, install plugins, cleanup plugins
@@ -46,8 +47,8 @@ nmap('<leader>fr', '<cmd>Telescope oldfiles<CR>', 'Recent files')
 nmap('<leader>pp', '<cmd>Telescope projects<CR>', 'Project list')
 
 -- sessions
-nmap('<leader><TAB>s', ":lua require('auto-session').SaveSession(require('auto-session').get_root_dir() .. vim.fn.input('SessionName > '))<CR>", 'Save Session File')
-nmap('<leader><TAB>l', ":SearchSession<CR>", 'List Session File')
+nmap('<leader><TAB>s', ":mks! .session.vim<CR>", 'Save Session File to session.vim')
+nmap('<leader><TAB>l', ":so .session.vim<CR>", 'Load Session from session.vim')
 -- nmap('<leader><TAB>l', ':Sessions<CR>')
 -- nmap('<leader><TAB>s', ':SSave<CR>')
 
@@ -87,10 +88,10 @@ nmap('<leader>wc', ':q<CR>', 'Close Window')
 nmap('<leader>wO', ':only<CR>', 'Only this Window')
 
 -- navigate windows
-nmap('<C-h>', '<C-w><C-h>', 'Move to left window')
-nmap('<C-l>', '<C-w><C-l>', 'Move to right window')
-nmap('<C-j>', '<C-w><C-j>', 'Move to bottom window')
-nmap('<C-k>', '<C-w><C-k>', 'Move to upper window')
+nmap('<C-h>', ':TmuxNavigateLeft<CR>', 'Move to left window')
+nmap('<C-l>', ':TmuxNavigateRight<CR>', 'Move to right window')
+nmap('<C-j>', ':TmuxNavigateDown<CR>', 'Move to bottom window')
+nmap('<C-k>', ':TmuxNavigateUp<CR>', 'Move to upper window')
 
 -- folder explorer
 nmap('<leader>od', ':NvimTreeToggle<CR>', 'Open Directory Explorer')
@@ -102,7 +103,12 @@ nmap('<A-,>', ':FloatermNew --wintype=float --width=0.98 --height=0.5 --position
 tmap('<A-,>', '<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>')
 tmap('<A-k>', '<C-\\><C-n>:FloatermNext<CR>')
 tmap('<A-j>', '<C-\\><C-n>:FloatermPrev<CR>')
-tmap('<esc>', '<C-\\><C-n>')
+tmap('<A-q>', '<C-\\><C-n>')
+
+-- project build 
+nmap('<leader>pb', ':make | Trouble quickfix<CR>', 'Build')
+nmap('<leader>pd', ':Trouble workspace_diagnostics<CR>', 'Diagnostics')
+nmap('<leader>pl', ':Trouble loclist<CR>', 'Locations')
 
 -- etc
 nmap('<leader>ht', ':Telescope themes<CR>', 'Change colorscheme')

@@ -30,6 +30,7 @@ set splitbelow
 set splitright
 set cmdheight=1
 set cursorline
+set exrc
 syntax enable
 set termguicolors
 set updatetime=100

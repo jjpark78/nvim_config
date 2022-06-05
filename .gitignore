@@ -2,3 +2,5 @@
 
 sessions
 plugin
+.zsh_env
+session.vim

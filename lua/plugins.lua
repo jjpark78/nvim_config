@@ -25,6 +25,9 @@ require('packer').startup(function()
     'startup-nvim/startup.nvim',
     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   }
+  use {
+    'christoomey/vim-tmux-navigator'
+  }
   use 'nvim-lua/popup.nvim'
   use 'ahmedkhalf/project.nvim'
   use 'lewis6991/gitsigns.nvim'
@@ -34,21 +37,8 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
   use 'onsails/lspkind.nvim'
-  -- use {
-  --   'rmagatti/auto-session',
-  --   config = function()
-  --     require('auto-session').setup {
-  --       log_level = 'info',
-  --       auto_session_suppress_dirs = {'~/', '~/develop'}
-  --     }
-  --   end
-  -- }
-  use {
-    'rmagatti/session-lens',
-    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
-  }
   use { 'numToStr/Comment.nvim' }
   use {
     'kdheepak/lazygit.nvim'
@@ -57,13 +47,32 @@ require('packer').startup(function()
     'neomake/neomake'
   }
   use {
-    'TimUntersberger/neogit', requires='nvim-lua/plenaty.nvim'
+    'tanvirtin/vgit.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+  use {
+    "klen/nvim-config-local"
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        auto_preview = false
+      }
+    end
+  }
+  use {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  }
+  use {
+    "mg979/vim-visual-multi", { branch = "master" }
   }
 end)
 
--- require('auto-session').setup(require('custom.session'))
-require('neogit').setup()
 require('custom.lazygit')
+require('custom.vgit')
 require('custom.nvim-cmp')
 require('nvim-autopairs').setup()
 require('gitsigns').setup()
@@ -73,19 +82,11 @@ require("themer").setup({ colorscheme = "dracula" })
 
 require('nvim-lsp-installer').setup()
 require('custom.lsp')
-
-require('session-lens').setup({
-  prompt_title = 'MY SESSIONS',
-  theme_conf = {
-    border = true,
-    winblend = 0
-  },
-  previewer = false,
-})
+require('config-local').setup()
+require('custom.trouble-setting')
 require('Comment').setup(require('custom.comment'))
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
-require('telescope').load_extension('session-lens')
 require('telescope').load_extension('lazygit')
 
 require("custom.floaterm")
