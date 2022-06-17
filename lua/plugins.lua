@@ -5,7 +5,9 @@ require('packer').startup(function()
   use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
-    'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } }
+    'nvim-telescope/telescope.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } }
+
   }
   use {
     'nvim-lualine/lualine.nvim',
@@ -69,6 +71,9 @@ require('packer').startup(function()
   use {
     "mg979/vim-visual-multi", { branch = "master" }
   }
+  use {
+    "ojroques/vim-oscyank", {branch = "master"}
+  }
 end)
 
 require('custom.lazygit')
@@ -85,6 +90,13 @@ require('custom.lsp')
 require('config-local').setup()
 require('custom.trouble-setting')
 require('Comment').setup(require('custom.comment'))
+require("telescope").setup({
+  extensions = {
+    projects = {
+      hidden_files = true,
+    },
+  },
+})
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
 require('telescope').load_extension('lazygit')

@@ -22,7 +22,8 @@ end
 local function tmap(shortcut, command)
   map('t', shortcut, command)
 end
-
+-- using system clipboard mappping
+vmap('<C-c>', ':OSCYank<CR>')
 -- quick access to specific files macro
 nmap('<leader>fev', ':e ~/.config/nvim/init.lua<CR>', 'Jump to init.lua')
 nmap('<leader>fek', ':e ~/.config/nvim/lua/keybindings.lua<CR>', 'Jump to keybindings.lua')
@@ -38,7 +39,7 @@ nmap('<leader>hrc', ':PackerClean<CR>', 'Packer clean command')
 nmap('<leader>hru', ':PackerUpdate<CR>', 'Packer update command')
 
 -- buffer, files actions
-nmap('<leader><leader>', '<cmd>Telescope find_files<CR>', 'Find files')
+nmap('<leader><leader>', '<cmd>Telescope find_files hidden=true<CR>', 'Find files')
 nmap('<leader>,', '<cmd>Telescope buffers<CR>', 'Opend buffers')
 nmap('<leader>.', '<cmd>Telescope git_files<CR>', 'Git files')
 nmap('<leader>fs', ':w<CR>', 'Save to disk buffer')
