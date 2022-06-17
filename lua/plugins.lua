@@ -91,12 +91,19 @@ require('config-local').setup()
 require('custom.trouble-setting')
 require('Comment').setup(require('custom.comment'))
 require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      "node_modules",
+      ".git"
+    },
+  },
   extensions = {
     projects = {
       hidden_files = true,
     },
   },
 })
+
 require("telescope").load_extension("themes")
 require('telescope').load_extension('projects')
 require('telescope').load_extension('lazygit')
