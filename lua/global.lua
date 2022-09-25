@@ -20,8 +20,8 @@ set nu rnu
 set softtabstop=2
 set shortmess+=c
 set nospell
+set noexpandtab
 set tabstop=2
-set expandtab
 set shiftwidth=2
 set clipboard=unnamedplus
 set smartindent
@@ -41,8 +41,16 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-set guifont=FiraMono\ NF:h10
+set guifont=FiraCode\ NF:h16
 
 let g:neovide_cursor_vfx_mode = "railgun"
 let g:neovide_remember_window_size = v:true
+
+let g:python3_host_prog = '/usr/bin/python3'
+
+let g:neovide_input_macos_alt_is_meta=v:true
+
+autocmd BufWritePost *.snippets :CmpUltisnipsReloadSnippets
+
+let g:im_select_default = 'com.apple.keylayout.ABC'
 ]])

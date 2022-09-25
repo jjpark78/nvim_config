@@ -28,15 +28,19 @@ nmap('<leader>fev', ':e ~/.config/nvim/init.lua<CR>', 'Jump to init.lua')
 nmap('<leader>fek', ':e ~/.config/nvim/lua/keybindings.lua<CR>', 'Jump to keybindings.lua')
 nmap('<leader>fep', ':e ~/.config/nvim/lua/plugins.lua<CR>', 'Jump to plugins.lua')
 nmap('<leader>fez', ':e ~/.zsh_env<CR>', 'Jump to ZSH Personal ENV Config')
+nmap('<leader>fea', ':e ~/.config/alacritty/alacritty.yml<CR>', 'Jump to Alacritty Config')
+nmap('<leader>feh', ':e ~/.hammerspoon/init.lua<CR>', 'Jump to Hammerspoon Config')
+nmap('<leader>fet', ':e ~/.config/tmuxinator<CR>', 'Jump to Tmuxinator Session Config')
 
 -- reload, install plugins, cleanup plugins
 nmap('<leader>hrr', ':so ~/.config/nvim/init.lua<CR>:PackerInstall<CR>', 'Reload configuration')
-nmap('<leader>hro', ':so %<CR>', 'Apply this Buffer')
 nmap('<leader>hrc', ':PackerClean<CR>', 'Packer clean command')
+nmap('<leader>hro', ':so %<CR>', 'Apply this Buffer')
 nmap('<leader>hru', ':PackerUpdate<CR>', 'Packer update command')
 
 -- buffer, files actions
-nmap('<leader>ff', '<cmd>Telescope find_files<CR>', 'Find files')
+nmap('<leader>ff',       '<cmd>Telescope find_files<CR>', 'Find files')
+nmap('<leader><leader>', '<cmd>Telescope find_files<CR>', 'Find files')
 nmap('<leader>,', '<cmd>Telescope buffers<CR>', 'Opend buffers')
 nmap('<leader>.', '<cmd>Telescope git_files<CR>', 'Git files')
 nmap('<leader>fs', ':w<CR>', 'Save to disk buffer')
@@ -52,8 +56,8 @@ nmap('<leader><TAB>l', ":SearchSession<CR>", 'List Session File')
 
 -- search
 nmap('<leader>sl', '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Search Line')
-nmap('<leader>sp', '<cmd>Telescope live_grep<CR>', 'Search Project')
 nmap('<leader>ss', '<cmd>Telescope lsp_document_symbols<CR>', 'Search LSP Symbol')
+nmap('<leader>sp', '<cmd>Telescope live_grep<CR>', 'Search Project')
 nmap('<leader>sS', '<cmd>Telescope lsp_workspace_symbols<CR>', 'Search Workspace Symbol')
 
 -- comment
@@ -72,12 +76,18 @@ nmap('gw', '<Plug>(easymotion-overwin-f2)', 'Jump to 2-word')
 nmap('gl', '<Plug>(easymotion-overwin-line)', 'Jump to line')
 
 -- move line
-nmap('<A-j>', ':m .+1<CR>==', '')
-nmap('<A-k>', ':m .-2<CR>==', '')
-imap('<A-j>', '<Esc>:m .+1<CR>==')
-imap('<A-k>', '<Esc>:m .-2<CR>==')
-vmap('<A-j>', ":m '>+1<CR>gv=gv")
-vmap('<A-k>', ":m '<-2<CR>gv=gv")
+imap('<M-k>', '<Esc>:m .-2<CR>==')
+nmap('<M-k>', ':m .-2<CR>==', '')
+vmap('<M-j>', ":m '>+1<CR>gv=gv")
+vmap('<M-k>', ":m '<-2<CR>gv=gv")
+imap('<M-j>', '<Esc>:m .+1<CR>==')
+nmap('<M-j>', ':m .+1<CR>==', '')
+
+-- move focus to other windows
+nmap('<C-h>', '<C-w><C-h>')
+nmap('<C-l>', '<C-w><C-l>')
+nmap('<C-j>', '<C-w><C-j>')
+nmap('<C-k>', '<C-w><C-k>')
 
 -- window actions
 nmap('<leader>wv', ':vsplit<CR>', 'Vertical Split')
@@ -86,24 +96,39 @@ nmap('<leader>wc', ':q<CR>', 'Close Window')
 nmap('<leader>wO', ':only<CR>', 'Only this Window')
 
 -- navigate windows
-nmap('<C-h>', '<C-w><C-h>', 'Move to left window')
-nmap('<C-l>', '<C-w><C-l>', 'Move to right window')
-nmap('<C-j>', '<C-w><C-j>', 'Move to bottom window')
-nmap('<C-k>', '<C-w><C-k>', 'Move to upper window')
+nmap('<leader>wh', '<C-w><C-h>', 'Move to left window')
+nmap('<leader>wl', '<C-w><C-l>', 'Move to right window')
+nmap('<leader>wj', '<C-w><C-j>', 'Move to bottom window')
+nmap('<leader>wk', '<C-w><C-k>', 'Move to upper window')
 
 -- folder explorer
 nmap('<leader>od', ':NvimTreeToggle<CR>', 'Open Directory Explorer')
 
 -- terminal
-nmap('<A-\\>', ':FloatermToggle<CR>', 'Toggle Terminal')
-tmap('<A-\\>', '<C-\\><C-n>:FloatermToggle<CR>')
-nmap('<A-,>', ':FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>', 'New Terminal')
-tmap('<A-,>', '<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>')
-tmap('<A-k>', '<C-\\><C-n>:FloatermNext<CR>')
-tmap('<A-j>', '<C-\\><C-n>:FloatermPrev<CR>')
+tmap('<M-\\>', '<C-\\><C-n>:FloatermToggle<CR>')
+nmap('<M-\\>', ':FloatermToggle<CR>', 'Toggle Terminal')
+nmap('<M-,>', ':FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>', 'New Terminal')
+tmap('<M-,>', '<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>')
+tmap('<M-k>', '<C-\\><C-n>:FloatermNext<CR>')
+tmap('<M-j>', '<C-\\><C-n>:FloatermPrev<CR>')
 
 -- etc
 nmap('<leader>ht', ':Telescope themes<CR>', 'Change colorscheme')
 
+-- lsp + lspsaga
+nmap('gr', ':Lspsaga lsp_finder<CR>', 'LSP Saga Find References')
+nmap('gR', ':Lspsaga rename<CR>', 'LSP Saga Rename symbol')
+nmap('K', ':Lspsaga hover_doc<CR>', 'LSP Saga Show Document')
+nmap('<leader>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', 'LSP Buffer format')
+nmap('<leader>ca', ':Lspsaga code_action<CR>', 'LSP Buffer format')
+nmap('<leader>ee', ':Lspsaga show_line_diagnostics<CR>', 'LSP Buffer format')
+nmap('gD', ':Lspsaga preview_definition<CR>', 'LSP Saga Preview definition')
+nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'LSP Goto definition')
+nmap('<leader>cx', ':Telescope diagnostics<CR>', 'Diagnostics in quickfix')
+-- snippets
+vim.cmd([[
+imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+]])
 -- exit neovim
 nmap('<leader>qq', ':qa<CR>', 'Quit neovim')

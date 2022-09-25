@@ -12,8 +12,8 @@
   update_cwd = false,
   reload_on_bufenter = true,
   view = {
-    width = 30,
-    height = 30,
+    width = 50,
+    -- height = 30,
     hide_root_folder = false,
     side = "left",
     preserve_window_proportions = false,
