@@ -1,4 +1,4 @@
- require'nvim-tree'.setup { 
+require "nvim-tree".setup {
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -22,38 +22,36 @@
     signcolumn = "yes",
     mappings = {
       custom_only = false,
-      list = {
-        -- user mappings go here
-      },
-    },
+      list = {}
+    }
   },
   renderer = {
     indent_markers = {
-      enable = false,
+      enable = true,
       icons = {
         corner = "└ ",
         edge = "│ ",
-        none = "  ",
-      },
+        none = "  "
+      }
     },
     icons = {
       webdev_colors = true,
-      git_placement = "before",
-    },
+      git_placement = "before"
+    }
   },
   hijack_directories = {
     enable = true,
-    auto_open = true,
+    auto_open = true
   },
   update_focused_file = {
     enable = false,
     update_cwd = false,
-    ignore_list = {},
+    ignore_list = {}
   },
   ignore_ft_on_setup = {},
   system_open = {
     cmd = "",
-    args = {},
+    args = {}
   },
   diagnostics = {
     enable = false,
@@ -62,25 +60,25 @@
       hint = "",
       info = "",
       warning = "",
-      error = "",
-    },
+      error = ""
+    }
   },
   filters = {
     dotfiles = false,
     custom = {},
-    exclude = {},
+    exclude = {}
   },
   git = {
     enable = true,
     ignore = true,
-    timeout = 400,
+    timeout = 400
   },
   actions = {
     use_system_clipboard = true,
     change_dir = {
       enable = true,
       global = false,
-      restrict_above_cwd = false,
+      restrict_above_cwd = false
     },
     open_file = {
       quit_on_open = true,
@@ -90,19 +88,20 @@
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
         exclude = {
           filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-          buftype = { "nofile", "terminal", "help" },
-        },
-      },
-    },
+          buftype = { "nofile", "terminal", "help" }
+        }
+      }
+    }
   },
   trash = {
     cmd = "trash",
-    require_confirm = true,
+    require_confirm = true
   },
   live_filter = {
     prefix = "[FILTER]: ",
-    always_show_folders = true,
+    always_show_folders = true
   },
+  sync_root_with_cwd = true,
   log = {
     enable = false,
     truncate = false,
@@ -112,8 +111,7 @@
       copy_paste = false,
       diagnostics = false,
       git = false,
-      profile = false,
-    },
-  },
+      profile = false
+    }
+  }
 } -- END_DEFAULT_OPTSocal M = {}
-

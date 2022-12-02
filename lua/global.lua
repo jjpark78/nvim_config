@@ -1,7 +1,8 @@
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 vim.g.encoding = "utf8"
 
-vim.cmd([[
+vim.cmd(
+  [[
 set nobackup
 set nowritebackup
 set noswapfile
@@ -20,7 +21,7 @@ set nu rnu
 set softtabstop=2
 set shortmess+=c
 set nospell
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set clipboard=unnamedplus
@@ -53,4 +54,17 @@ let g:neovide_input_macos_alt_is_meta=v:true
 autocmd BufWritePost *.snippets :CmpUltisnipsReloadSnippets
 
 let g:im_select_default = 'com.apple.keylayout.ABC'
-]])
+
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
+let g:blamer_date_format = '%y-%m-%d'
+let g:blamer_template = '<committer> <summary> at <committer-time>'
+au CursorHold * checktime  
+
+let g:test#strategy = "neomake"
+let g:test#javascript#jest#options = '--runInBand --detectOpenHandles --reporters jest-vim-reporter'
+let g:test#typescript#jest#options = '--runInBand --detectOpenHandles --reporters jest-vim-reporter'
+let g:test#javascript#runner = 'jest'
+let g:test#typescript#runner = 'jest'
+]]
+)
