@@ -63,6 +63,7 @@ nmap("<leader>pp", "<cmd>Telescope projects<CR>", "Project list")
 
 -- search
 nmap("<leader>sl", "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Search Line")
+nmap("<leader>sf", "<cmd>Telescope find_files<CR>", "Search File")
 nmap("<leader>ss", "<cmd>Telescope lsp_document_symbols<CR>", "Search LSP Symbol")
 nmap("<leader>sp", "<cmd>Telescope live_grep<CR>", "Search Project")
 nmap("<leader>sS", "<cmd>Telescope lsp_workspace_symbols<CR>", "Search Workspace Symbol")
@@ -121,9 +122,11 @@ nmap("<M-,>", ":FloatermNew --wintype=float --width=0.98 --height=0.5 --position
 tmap("<M-,>", "<C-\\><C-n>:FloatermNew --wintype=float --width=0.98 --height=0.5 --position=bottom<CR>")
 tmap("<M-k>", "<C-\\><C-n>:FloatermNext<CR>")
 tmap("<M-j>", "<C-\\><C-n>:FloatermPrev<CR>")
+-- tmap("<esc><esc>", "<C-\\><C-n>")
 
--- quickfix
+-- quickfix & location list
 nmap("<leader>qn", ":cn<CR>", "quickfix next")
+nmap("<leader>qo", ":co<CR>", "quickfix open")
 nmap("<leader>qp", ":cp<CR>", "quickfix previous")
 nmap("<leader>qc", ":ccl<CR>", "quickfix close")
 
@@ -132,6 +135,7 @@ nmap("<leader>gfl", ":DiffviewFileHistory %<CR>", "git file history")
 
 -- etc
 nmap("<leader>ht", ":Telescope themes<CR>", "Change colorscheme")
+nmap("<esc><esc><esc>", ":noh<CR>", "noh")
 
 -- lsp + lspsaga
 nmap("gr", ":Lspsaga lsp_finder<CR>", "LSP Saga Find References")
@@ -143,15 +147,23 @@ nmap("<leader>ee", ":Lspsaga show_line_diagnostics<CR>", "LSP Buffer format")
 nmap("gD", ":Lspsaga preview_definition<CR>", "LSP Saga Preview definition")
 nmap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "LSP Goto definition")
 nmap("<leader>cx", ":Telescope diagnostics<CR>", "Diagnostics in quickfix")
-nmap("<leader>lx", ":Lspsaga show_line_diagnostics<CR>", "Diagnostics in quickfix")
+nmap("<leader>ss", ":Telescope lsp_document_symbols<CR>", "Search Symbols in Buffer")
+
 -- snippets
 vim.cmd(
   [[
-imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 ]]
 )
-
+-- undo tree
+nmap("<leader>uu", ":UndotreeToggle<CR>", "")
 -- markdown
 nmap("<leader>ii", ":PasteImg<CR>", "store image from clipboard, and insert image markdown to buffer")
 -- exit neovim

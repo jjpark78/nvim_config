@@ -28,7 +28,7 @@ require("diffview").setup({
     -- For more info, see ':h diffview-config-view.x.layout'.
     default = {
       -- Config for changed files, and staged files in diff views.
-      layout = "diff2_horizontal",
+      layout = "diff2_vertical",
     },
     merge_tool = {
       -- Config for conflicted files in diff views during a merge or rebase.

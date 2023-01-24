@@ -23,3 +23,5 @@ require("lspconfig").gopls.setup {}
 require("lspconfig").pyright.setup {}
 require("lspconfig").volar.setup {}
 require("lspconfig").yamlls.setup {}
+
+require("lspconfig").korean_ls.setup {}
