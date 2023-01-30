@@ -53,14 +53,14 @@ require("diffview").setup({
     },
   },
   file_history_panel = {
-    log_options = { -- See ':h diffview-config-log_options'
-      single_file = {
-        diff_merges = "combined",
-      },
-      multi_file = {
-        diff_merges = "first-parent",
-      },
-    },
+    -- log_options = { -- See ':h diffview-config-log_options'
+    --   single_file = {
+    --     diff_merges = "combined",
+    --   },
+    --   multi_file = {
+    --     diff_merges = "first-parent",
+    --   },
+    -- },
     win_config = { -- See ':h diffview-config-win_config'
       position = "bottom",
       height = 16,
@@ -97,7 +97,7 @@ require("diffview").setup({
       ["<leader>cb"] = actions.conflict_choose("base"), -- Choose the BASE version of a conflict
       ["<leader>ca"] = actions.conflict_choose("all"), -- Choose all the versions of a conflict
       ["dx"]         = actions.conflict_choose("none"), -- Delete the conflict region
-      ["qq"]         = "<CMD>DiffviewClose<CR>",
+      ["<ESC>"]      = "<CMD>DiffviewClose<CR>",
     },
     diff1 = { --[[ Mappings in single window diff layouts ]] },
     diff2 = { --[[ Mappings in 2-way diff layouts ]] },
@@ -140,7 +140,7 @@ require("diffview").setup({
       ["g<C-x>"]        = actions.cycle_layout,
       ["[x"]            = actions.prev_conflict,
       ["]x"]            = actions.next_conflict,
-      ["qq"]            = "<CMD>DiffviewClose<CR>",
+      ["<ESC>"]         = "<CMD>DiffviewClose<CR>",
     },
     file_history_panel = {
       ["g!"]            = actions.options, -- Open the option panel
@@ -166,11 +166,11 @@ require("diffview").setup({
       ["<leader>e"]     = actions.focus_files,
       ["<leader>b"]     = actions.toggle_files,
       ["g<C-x>"]        = actions.cycle_layout,
-      ["qq"]            = "<CMD>DiffviewClose<CR>",
+      ["<ESC>"]         = "<CMD>DiffviewClose<CR>",
     },
     option_panel = {
       ["<tab>"] = actions.select_entry,
-      ["q"]     = actions.close,
+      ["<ESC>"] = actions.close,
     },
   },
 })

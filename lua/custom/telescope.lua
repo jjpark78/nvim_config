@@ -6,20 +6,25 @@ require('telescope').setup({
       vertical = {
         width = 0.8
       }
+    },
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+      },
     }
   },
-	pickers = {
-		live_grep = {
-			mappings = {
-				i = { ["<C-f>"] = actions.to_fuzzy_refine }
-			}
-		},
-		lsp_workspace_symbols = {
-			mappings = {
-				i = { ["<C-f>"] = actions.to_fuzzy_refine }
-			}
-		}
-	}
+  pickers = {
+    live_grep = {
+      mappings = {
+        i = { ["<C-f>"] = actions.to_fuzzy_refine }
+      }
+    },
+    lsp_workspace_symbols = {
+      mappings = {
+        i = { ["<C-f>"] = actions.to_fuzzy_refine }
+      }
+    }
+  }
 })
 
 require('telescope').load_extension("themes")
