@@ -1,0 +1,19 @@
+-- 
+-- local settings = {
+--   save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
+--   silent = false,
+--   use_git_branch = false,
+--   default_branch = "develop",
+--   autosave = true,
+--   should_autosave = nil,
+--   autoload = false,
+--   on_autoload_no_session = nil,
+--   follow_cwd = true,
+--   allowed_dirs = nil,
+--   ignored_dirs = nil,
+--   telescope = {
+--     reset_prompt = true,
+--   },
+-- }
+-- require("persisted").setup(settings)
+-- require("telescope").load_extension("persisted")
