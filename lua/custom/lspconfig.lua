@@ -1,5 +1,6 @@
-local on_attach = require("configs.lspconfig").on_attach
-local capabilities = require("configs.lspconfig").capabilities
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_init = require("nvchad.configs.lspconfig").on_init
+local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 

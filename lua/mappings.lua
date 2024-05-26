@@ -4,8 +4,8 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", "<leader>fek", ":e ~/.config/nvim/lua/custom/mappings.lua<CR>", { desc = "Keyboard" })
-map("n", "<leader>fep", ":e ~/.config/nvim/lua/custom/plugins.lua<CR>", { desc = "Plugin" })
+map("n", "<leader>fek", ":e ~/.config/nvim/lua/mappings.lua<CR>", { desc = "Keyboard" })
+map("n", "<leader>fep", ":e ~/.config/nvim/lua/plugins/init.lua<CR>", { desc = "Plugin" })
 map("n", "<leader>fez", ":e ~/.zshenv<CR>", { desc = "Zshell" })
 map("n", "<leader>fet", ":e ~/.config/kitty/kitty.conf<CR>", { desc = "Kitty" })
 map("n", "<leader>fex", ":e ~/.tmux.conf<CR>", { desc = "Tmux" })
@@ -71,7 +71,7 @@ map("n", "<leader>qc", ":ccl<CR>", { desc = "quickfix close" })
 map("n", "gr", ":Telescope lsp_references<CR>", { desc = "LSP References" })
 map("n", "gR", ":Lspsaga rename<CR>", { desc = "LSP Saga Rename symbol" })
 map("n", "K", ":Lspsaga hover_doc<CR>", { desc = "LSP Saga Show Document" })
---     -- ["<leader>bf"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "LSP Buffer format" },
+map("n", "<leader>bf", ":Format<CR>", { desc = "Conform Buffer format" })
 map("n", "<leader>ca", ":Lspsaga code_action<CR>", { desc = "LSP Buffer format" })
 map("n", "<leader>ee", ":Lspsaga show_line_diagnostics<CR>", { desc = "LSP Buffer format" })
 map("n", "gD", ":Lspsaga preview_definition<CR>", { desc = "LSP Saga Preview definition" })
